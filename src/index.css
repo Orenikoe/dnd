@@ -5,9 +5,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://img.freepik.com/premium-vector/seamless-doodle-pattern-with-outlined-sheet-print-cannabis-leaves-green-blue-colors-light-pastel-backgrouund-perfect-wallpaper-wrapping-textile-print-fabric-illustration_97843-1126.jpg?w=2000');
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media screen and (min-width: 600px) {
+  #root {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 600px) {
+  body{
+    padding: 20px;
+  }
+}
+
