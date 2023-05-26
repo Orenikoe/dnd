@@ -6,7 +6,7 @@ import UserContext from "../../services/localStorage.service";
 
 const TasksDisplay = (props) => {
 	const {  userDetails, tasks, setTasks } = useContext(UserContext);
-	const [filteredTodo, setFilteredTodo ] = useState(tasks);
+	// const [filteredTodo, setFilteredTodo ] = useState(tasks);
 	const [todoInputText, setTodoInputText] = useState('');
 	const [editMode, setEditMode] = useState({ state: false, taskIndex: null });
 	let todoItemDrag = useRef();
@@ -20,9 +20,9 @@ const TasksDisplay = (props) => {
 		}
 	}, []);
 
-	useEffect(() => {
-		setFilteredTodo(tasks.filter((item) => item.owner === userDetails.token))
-	}, [tasks]);
+	// useEffect(() => {
+	// 	setFilteredTodo(tasks.filter((item) => item.owner === userDetails.token))
+	// }, [tasks]);
 
 	function handleAddTodo() {
 		if (todoInputText.length > 0 && !editMode.state) {
@@ -54,7 +54,6 @@ const TasksDisplay = (props) => {
 	
 
 	function handleTodoClicks(e, index) {
-		console.log(filteredTodo)
 		switch (e.detail) {
 			case 1:
 				const newArr = [];
@@ -140,7 +139,7 @@ const TasksDisplay = (props) => {
 					{editMode.state ? 'Save Changes' : 'Add Task'}
 				</button>
 				<div className="display-todo-container">
-					{filteredTodo.map((todo, index) => (
+					{tasks.map((todo, index) => (
 						<div className="task-wrapper">
 							<h3
 								key={index}

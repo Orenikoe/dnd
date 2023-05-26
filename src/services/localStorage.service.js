@@ -7,8 +7,8 @@ export default UserContext;
 
 export function UserContextProvider({ children }) {
   const [userDetails, setUserDetails] = useState({token: localStorage.getItem("token") || null});
-  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks') || [])
-);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || [])
+
 
 
   useEffect(() => {
