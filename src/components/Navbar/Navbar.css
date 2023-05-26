@@ -1,8 +1,13 @@
 nav {
     display: flex;
     height: 100px;
-    justify-content: space-around;
     align-items: center;
+    position: absolute;
+    top: 20px;
+}
+
+.button {
+    margin: 20px;
 }
 
 .company-logo {
