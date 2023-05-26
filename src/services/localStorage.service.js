@@ -6,20 +6,22 @@ const UserContext = createContext();
 export default UserContext;
 
 export function UserContextProvider({ children }) {
-  const [userDetails, setUserDetails] = useState({token: null});
+  const [userDetails, setUserDetails] = useState({token: localStorage.getItem("token") || null});
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || [])
+
+
 
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
-        setUserDetails({token: localStorage.getItem("token")})
-    } else {setUserDetails({token: null})}
-  }, []);
-
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}, [tasks]);
 
   return (
     <UserContext.Provider
       value={{
         userDetails,
-        setUserDetails
+        setUserDetails,
+        tasks, 
+        setTasks
       }}
     >
       {children}
