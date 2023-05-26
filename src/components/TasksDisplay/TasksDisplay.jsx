@@ -5,18 +5,14 @@ import UserContext from "../../services/localStorage.service";
 
 
 const TasksDisplay = (props) => {
-	const {  userDetails } = useContext(UserContext);
-	const [todos, setTodos] = useState(
-		JSON.parse(localStorage.getItem('tasks'))
-			? JSON.parse(localStorage.getItem('tasks'))
-			: []
-	);
+	const {  userDetails, tasks, setTasks } = useContext(UserContext);
+	const [filteredTodo, setFilteredTodo ] = useState(tasks);
 	const [todoInputText, setTodoInputText] = useState('');
 	const [editMode, setEditMode] = useState({ state: false, taskIndex: null });
 	let todoItemDrag = useRef();
 	let todoItemDragOver = useRef();
 	const inputRef = useRef(null);
-	const navigate = useNavigate('/login');
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (userDetails.token === null) {
@@ -24,21 +20,27 @@ const TasksDisplay = (props) => {
 		}
 	}, []);
 
+	useEffect(() => {
+		setFilteredTodo(tasks.filter((item) => item.owner === userDetails.token))
+	}, [tasks]);
+
 	function handleAddTodo() {
 		if (todoInputText.length > 0 && !editMode.state) {
-			setTodos([
-				...todos,
-				{ todo: todoInputText, complete: false, isDragging: false },
+			setTasks([
+				...tasks,
+				{owner: userDetails.token, todo: todoInputText, complete: false, isDragging: false, isEdited: false, history: [] },
 			]);
 		}
 		if (editMode.state && todoInputText.length > 0) {
-			const editedTasks = todos.map((todo, index) => {
+			const editedTasks = tasks.map((todo, index) => {
 				if (index === editMode.taskIndex) {
+					todo.history.push(todo.todo)
 					todo.todo = todoInputText;
+					todo.isEdited = true;
 				}
 				return todo;
 			});
-			setTodos(editedTasks);
+			setTasks(editedTasks);
 			inputRef.current.value = "";
 		}
 		setEditMode({ state: false, taskIndex: null });
@@ -49,21 +51,17 @@ const TasksDisplay = (props) => {
 		inputRef.current.value = taskData.todo;
 	};
 
-	useEffect(() => {
-		localStorage.setItem('tasks', JSON.stringify(todos));
-	}, [todos]);
-
 	
 
 	function handleTodoClicks(e, index) {
+		console.log(filteredTodo)
 		switch (e.detail) {
 			case 1:
-				// complete - > true
 				const newArr = [];
-				todos.forEach((item, i) => {
+				tasks.forEach((item, i) => {
 					if (i === index) {
 						newArr.push({
-							todo: item.todo,
+							...item,
 							complete: !item.complete,
 						});
 					} else {
@@ -71,10 +69,11 @@ const TasksDisplay = (props) => {
 					}
 				});
 
-				setTodos(newArr);
+				setTasks(newArr);
+
 				break;
 			case 2:
-				setTodos(todos.filter((item, iy) => iy !== index));
+				setTasks(tasks.filter((item, iy) => iy !== index));
 				break;
 
 			default:
@@ -89,24 +88,23 @@ const TasksDisplay = (props) => {
 	function D_Enter(e, index) {
 		todoItemDragOver.current = index;
 
-		const cpArr = [...todos];
+		const cpArr = [...tasks];
 
 		let finalArr = [];
 
 		cpArr.forEach((item) => {
 			finalArr.push({
-				todo: item.todo,
-				complete: item.complete,
+				...item,
 				isDragging: true,
 			});
 		});
 
 		finalArr[index].isDragging = true;
 
-		setTodos(finalArr);
+		setTasks(finalArr);
 	}
 	function D_End() {
-		const arr1 = [...todos];
+		const arr1 = [...tasks];
 
 		const todo_item_main = arr1[todoItemDrag.current];
 		arr1.splice(todoItemDrag.current, 1);
@@ -119,19 +117,17 @@ const TasksDisplay = (props) => {
 
 		arr1.forEach((item) => {
 			f_arr.push({
-				todo: item.todo,
-				complete: item.complete,
+				...item,
 				isDragging: false,
 			});
 		});
 
-		setTodos(f_arr);
+		setTasks(f_arr);
 	}
 
 	return (
 		<div>
 			<h1>{props.title}</h1>
-
 			<div className="todo-container">
 				<input
 					ref={inputRef}
@@ -144,7 +140,7 @@ const TasksDisplay = (props) => {
 					{editMode.state ? 'Save Changes' : 'Add Task'}
 				</button>
 				<div className="display-todo-container">
-					{todos.map((todo, index) => (
+					{filteredTodo.map((todo, index) => (
 						<div className="task-wrapper">
 							<h3
 								key={index}
@@ -162,12 +158,17 @@ const TasksDisplay = (props) => {
 								{todo.todo}
 							</h3>
 							{todo.isDragging ? <div className="drag-indicator"></div> : null}
-							<img
+							{props.mode === 'current' ? <img
 								className="edit-img"
 								onClick={() => editTask(todo, index)}
 								src="https://www.freeiconspng.com/thumbs/edit-icon-png/edit-icon-15.png"
 								alt="edit"
-							></img>
+							></img> : null}
+								<div>
+							{props.mode === 'history' && todo.history.map((version) => {
+								return <p>{version}</p>
+							})}
+							</div>
 						</div>
 					))}
 				</div>

@@ -14,18 +14,13 @@ const Main = () => {
 	return (
 		<main>
 			<Routes>
-				<Route path="/login" element={< Login />} />
-				<Route
-					path="/done"
-					element={<TasksDisplay data={todos} title='Done'  />}
-				/>
 				<Route
 					path="/tasks"
-					element={<TasksDisplay data={todos} title='To Do' />}
+					element={<TasksDisplay data={todos} mode='current' title='To Do' />}
 				/>
 				<Route
 					path="/history"
-					element={<TasksDisplay data={todos} title='Edit History'  />}
+					element={<TasksDisplay data={todos} mode='history' title='Edit History'  />}
 				/>
 				<Route
 					path="/"

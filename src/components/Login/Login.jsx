@@ -11,12 +11,13 @@ const Login = () => {
 	const [signUpMode, setSignUpMode] = useState(false);
 	const [otp, setOtp] = useState(null);
 	const [error, setError] = useState(false);
+	const [otpError, setOtpError] = useState(false);
   const navigate = useNavigate()
 
 	function handleLogin(phone) {
 		console.log(phone);
 		authApi
-			.postUser('0788418915')
+			.registerUser(phone)
 			.then((res) => {
 				setApproved(() => true);
 			})
@@ -49,6 +50,7 @@ const Login = () => {
         setUserDetails({token: phone})
 			})
 			.catch((err) => {
+        setOtpError(true)
 				console.log(err);
 			});
 	}
@@ -72,6 +74,7 @@ const Login = () => {
 						placeholder="OTP"
 						onChange={(e) => {
 							setOtp(e.target.value);
+              setOtpError(false)
 						}}
 					></input>
 					<div>
@@ -80,6 +83,7 @@ const Login = () => {
 				</div>
 			)}
 			{error && <h6>Number is not registered with us</h6>}
+			{otpError && <h6>OTP is incorrect</h6>}
 			<p onClick={() => setSignUpMode(true)}>
 				Doesn't have an acoount? Join Us!
 			</p>

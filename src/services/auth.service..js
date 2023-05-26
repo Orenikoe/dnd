@@ -4,17 +4,7 @@ import axios from "axios"
 
 
 export const authApi = {
-  postUser: async function (phoneNumber) {
-    phoneNumber = phoneNumber.substring(1)
-    await axios.post(`${api.BASE_URL}/login/otp`, {
-      PhoneCountryPrefix: '+44',
-      PhoneLocalNumber: '0' + phoneNumber,
-      PhoneE164Format: '+44' + phoneNumber,
-      FirstName: 'Johnny',
-      LastName: 'Cash',
-      Type: 2,
-    });
-  },
+
 
   registerUser: async function (phoneNumber) {
     phoneNumber = phoneNumber.substring(1)

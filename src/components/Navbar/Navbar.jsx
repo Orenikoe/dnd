@@ -1,4 +1,3 @@
-import NavButton from '../Button/Button'
 import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import { NavbarLinks } from '../../app-consts'
@@ -15,7 +14,7 @@ const Navbar = () => {
             return  <Link key={navElement.toLocation} onClick={navElement.functionality ? () => {
               localStorage.removeItem('token')
               setUserDetails({token: null})
-            } : null} to={navElement.toLocation}><NavButton data={navElement}/></Link>
+            } : null} to={navElement.toLocation}><button>{navElement.title}</button></Link>
         })}
        
     </nav>
