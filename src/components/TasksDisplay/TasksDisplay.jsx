@@ -1,11 +1,10 @@
 import './TasksDisplay.css';
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserContext from "../../services/localStorage.service";
-
+import UserContext from '../../services/localStorage.service';
 
 const TasksDisplay = (props) => {
-	const {  userDetails, tasks, setTasks } = useContext(UserContext);
+	const { userDetails, tasks, setTasks } = useContext(UserContext);
 	// const [filteredTodo, setFilteredTodo ] = useState(tasks);
 	const [todoInputText, setTodoInputText] = useState('');
 	const [editMode, setEditMode] = useState({ state: false, taskIndex: null });
@@ -14,9 +13,10 @@ const TasksDisplay = (props) => {
 	const inputRef = useRef(null);
 	const navigate = useNavigate();
 
+
 	useEffect(() => {
 		if (userDetails.token === null) {
-			navigate('/login') 
+			navigate('/login');
 		}
 	}, []);
 
@@ -28,20 +28,27 @@ const TasksDisplay = (props) => {
 		if (todoInputText.length > 0 && !editMode.state) {
 			setTasks([
 				...tasks,
-				{owner: userDetails.token, todo: todoInputText, complete: false, isDragging: false, isEdited: false, history: [] },
+				{
+					owner: userDetails.token,
+					todo: todoInputText,
+					complete: false,
+					isDragging: false,
+					isEdited: false,
+					history: [],
+				},
 			]);
 		}
 		if (editMode.state && todoInputText.length > 0) {
 			const editedTasks = tasks.map((todo, index) => {
 				if (index === editMode.taskIndex) {
-					todo.history.push(todo.todo)
+					todo.history.push(todo.todo);
 					todo.todo = todoInputText;
 					todo.isEdited = true;
 				}
 				return todo;
 			});
 			setTasks(editedTasks);
-			inputRef.current.value = "";
+			inputRef.current.value = '';
 		}
 		setEditMode({ state: false, taskIndex: null });
 	}
@@ -50,8 +57,6 @@ const TasksDisplay = (props) => {
 		setEditMode({ state: true, taskIndex: index });
 		inputRef.current.value = taskData.todo;
 	};
-
-	
 
 	function handleTodoClicks(e, index) {
 		switch (e.detail) {
@@ -126,7 +131,7 @@ const TasksDisplay = (props) => {
 
 	return (
 		<div>
-			<h1 className='top-title'>{props.title}</h1>
+			<h1 className="top-title">{props.title}</h1>
 			<div className="todo-container">
 				<input
 					ref={inputRef}
@@ -154,20 +159,15 @@ const TasksDisplay = (props) => {
 								onClick={(e) => handleTodoClicks(e, index)}
 								className="todo-item-text"
 							>
-								{todo.todo}
+							{todo.todo}
 							</h3>
 							{todo.isDragging ? <div className="drag-indicator"></div> : null}
-							{props.mode === 'current' ? <img
-								className="edit-img"
-								onClick={() => editTask(todo, index)}
-								src="https://www.freeiconspng.com/thumbs/edit-icon-png/edit-icon-15.png"
-								alt="edit"
-							></img> : null}
-								<div>
-							{props.mode === 'history' && todo.history.map((version) => {
-								return <p>{version}</p>
-							})}
-							</div>
+								<img
+									className="edit-img"
+									onClick={() => editTask(todo, index)}
+									src="https://www.freeiconspng.com/thumbs/edit-icon-png/edit-icon-15.png"
+									alt="edit"
+								></img>
 						</div>
 					))}
 				</div>

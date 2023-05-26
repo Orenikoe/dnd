@@ -6,6 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url('https://img.freepik.com/premium-vector/seamless-doodle-pattern-with-outlined-sheet-print-cannabis-leaves-green-blue-colors-light-pastel-backgrouund-perfect-wallpaper-wrapping-textile-print-fabric-illustration_97843-1126.jpg?w=2000');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
 }
 
 code {

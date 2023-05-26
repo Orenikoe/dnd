@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import TasksDisplay from '../TasksDisplay/TasksDisplay';
+import History from '../History/History';
 import Login from '../Login/Login';
 
 const Main = () => {
@@ -20,7 +21,7 @@ const Main = () => {
 				/>
 				<Route
 					path="/history"
-					element={<TasksDisplay data={todos} mode='history' title='Edit History'  />}
+					element={<History data={todos} mode='history' title='Edit History'  />}
 				/>
 				<Route
 					path="/"
