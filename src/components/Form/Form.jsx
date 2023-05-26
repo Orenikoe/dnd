@@ -1,11 +1,11 @@
 import React from 'react'
 import './Form.css'
 
-const Form = (props) => {
+const Form = ({data}) => {
   return (
     <div className='form'>
-      {props.data.map((field) => {
-          return <input key={field.isMandatory} type={field.inputType} placeholder={field.title} name={field.title}/>
+      {data.map((field, index) => {
+          return <input key={index} onChange={(e) => e.target.value}  type={field.inputType} placeholder={field.title} name={field.title}/>
       })}
       
     </div>

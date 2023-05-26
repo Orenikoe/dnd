@@ -29,7 +29,7 @@ const Main = () => {
 				/>
 				<Route
 					path="/"
-					element={<TasksDisplay title='To Do' />}
+					element={< Login />}
 				/>
 			</Routes>
 		</main>
