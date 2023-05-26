@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import './Login.css'
 import { authApi } from '../../services/auth.service.';
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../../services/localStorage.service";
@@ -15,10 +16,10 @@ const Login = () => {
   const navigate = useNavigate()
 
 	function handleLogin(phone) {
-		console.log(phone);
 		authApi
-			.registerUser(phone)
+			.loginUser(phone)
 			.then((res) => {
+        console.log(res)
 				setApproved(() => true);
 			})
 			.catch((err) => {
@@ -31,6 +32,7 @@ const Login = () => {
 		authApi
 			.registerUser(phone)
 			.then((res) => {
+        console.log(res)
 				setApproved(() => true);
 			})
 			.catch((err) => {
@@ -40,9 +42,8 @@ const Login = () => {
 	}
 
 	function verifyLogin(phone, otp) {
-		console.log(phone);
 		authApi
-			.login(phone, otp)
+			.verifyUser(phone, otp)
 			.then((res) => {
 				console.log(res);
 				localStorage.setItem('token', phone);
@@ -57,8 +58,9 @@ const Login = () => {
 
 	return (
 		<>
-			<h2>{signUpMode ? "Join Us Now!" : "Welcome Back!"}</h2>
+			<h2 className='top-title'>{signUpMode ? "Join Us Now!" : "Welcome Back!"}</h2>
 			<input
+      className='input-field'
 				placeholder="Telephone"
 				onChange={(e) => {
 					setPhone(e.target.value);
@@ -66,11 +68,12 @@ const Login = () => {
 				}}
 			></input>
 			{!approved && (
-				<button onClick={() => signUpMode ? handleSignUp(phone) : handleLogin(phone)}>{signUpMode ? "Next" : "Send Me Otp"}</button>
+				<button className='button' onClick={() => signUpMode ? handleSignUp(phone) : handleLogin(phone)}>{signUpMode ? "Next" : "Send Me Otp"}</button>
 			)}
 			{approved && (
 				<div>
 					<input
+          className='input-field'
 						placeholder="OTP"
 						onChange={(e) => {
 							setOtp(e.target.value);
@@ -78,12 +81,12 @@ const Login = () => {
 						}}
 					></input>
 					<div>
-						<button onClick={() => verifyLogin(phone, otp)}>{signUpMode ? "Register" : "Login"}</button>
+						<button className='button' onClick={() => verifyLogin(phone, otp)}>{signUpMode ? "Register" : "Login"}</button>
 					</div>
 				</div>
 			)}
-			{error && <h6>Number is not registered with us</h6>}
-			{otpError && <h6>OTP is incorrect</h6>}
+			{error && <h6 className='error-line'>Number is not registered with us</h6>}
+			{otpError && <h6 className='error-line'>OTP is incorrect</h6>}
 			<p onClick={() => setSignUpMode(true)}>
 				Doesn't have an acoount? Join Us!
 			</p>

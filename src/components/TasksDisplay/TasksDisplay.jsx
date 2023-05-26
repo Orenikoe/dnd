@@ -126,7 +126,7 @@ const TasksDisplay = (props) => {
 
 	return (
 		<div>
-			<h1>{props.title}</h1>
+			<h1 className='top-title'>{props.title}</h1>
 			<div className="todo-container">
 				<input
 					ref={inputRef}
