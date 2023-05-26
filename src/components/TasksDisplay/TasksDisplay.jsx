@@ -1,8 +1,11 @@
 import './TasksDisplay.css';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserContext from "../../services/localStorage.service";
+
 
 const TasksDisplay = (props) => {
-	console.log(props.data);
+	const {  userDetails } = useContext(UserContext);
 	const [todos, setTodos] = useState(
 		JSON.parse(localStorage.getItem('tasks'))
 			? JSON.parse(localStorage.getItem('tasks'))
@@ -13,6 +16,13 @@ const TasksDisplay = (props) => {
 	let todoItemDrag = useRef();
 	let todoItemDragOver = useRef();
 	const inputRef = useRef(null);
+	const navigate = useNavigate('/login');
+
+	useEffect(() => {
+		if (userDetails.token === null) {
+			navigate('/login') 
+		}
+	}, []);
 
 	function handleAddTodo() {
 		if (todoInputText.length > 0 && !editMode.state) {
@@ -42,6 +52,8 @@ const TasksDisplay = (props) => {
 	useEffect(() => {
 		localStorage.setItem('tasks', JSON.stringify(todos));
 	}, [todos]);
+
+	
 
 	function handleTodoClicks(e, index) {
 		switch (e.detail) {

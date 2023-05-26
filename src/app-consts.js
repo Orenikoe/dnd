@@ -2,7 +2,6 @@
 //                                      Data for Form Fields
 // ==============================================================================================
 
-
 export const api = {
 	BASE_URL: 'https://groops.azurewebsites.net/api'
 }
@@ -23,11 +22,6 @@ export const NavbarLinks = [
 		toLocation: '/tasks',
 	},
 	{
-		title: 'Done',
-		isSelected: null,
-		toLocation: '/done',
-	},
-	{
 		title: 'History',
 		isSelected: null,
 		toLocation: '/history',
@@ -35,7 +29,11 @@ export const NavbarLinks = [
     {
 		title: 'Logout',
 		isSelected: null,
-		toLocation: '/login',
-	},
+		toLocation: '/',
+		functionality: () => {
+			localStorage.removeItem('token')
+		}
+		}
+	
 
 ];
