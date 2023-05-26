@@ -14,7 +14,7 @@ const Navbar = () => {
             return  <Link key={navElement.toLocation} onClick={navElement.functionality ? () => {
               localStorage.removeItem('token')
               setUserDetails({token: null})
-            } : null} to={navElement.toLocation}><button>{navElement.title}</button></Link>
+            } : null} to={navElement.toLocation}><button className='button'>{navElement.title}</button></Link>
         })}
        
     </nav>
