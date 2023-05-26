@@ -1,16 +1,11 @@
 nav {
-    display: flex;
+    /* display: flex;
     height: 100px;
     align-items: center;
     position: absolute;
-    top: 20px;
+    top: 20px; */
 }
 
 .button {
     margin: 20px;
-}
-
-.company-logo {
-    height: 100%;
-    width: 100%;
 }

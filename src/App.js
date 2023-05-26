@@ -6,8 +6,8 @@ import { UserContextProvider } from "./services/localStorage.service";
 function App() {
 	return (
 		<UserContextProvider>
-      <Navbar/>
 		<div className="App">
+      <Navbar/>
       <Main/>
 		</div>
 		</UserContextProvider>

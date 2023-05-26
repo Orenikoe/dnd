@@ -5,7 +5,6 @@ import UserContext from '../../services/localStorage.service';
 
 const TasksDisplay = (props) => {
 	const { userDetails, tasks, setTasks } = useContext(UserContext);
-	// const [filteredTodo, setFilteredTodo ] = useState(tasks);
 	const [todoInputText, setTodoInputText] = useState('');
 	const [editMode, setEditMode] = useState({ state: false, taskIndex: null });
 	let todoItemDrag = useRef();
@@ -19,10 +18,6 @@ const TasksDisplay = (props) => {
 			navigate('/login');
 		}
 	}, []);
-
-	// useEffect(() => {
-	// 	setFilteredTodo(tasks.filter((item) => item.owner === userDetails.token))
-	// }, [tasks]);
 
 	function handleAddTodo() {
 		if (todoInputText.length > 0 && !editMode.state) {
@@ -148,7 +143,7 @@ const TasksDisplay = (props) => {
 						<div className="task-wrapper">
 							<h3
 								key={index}
-								draggable
+								draggable={true}
 								onDragStart={(e) => D_Start(e, index)}
 								onDragEnter={(e) => D_Enter(e, index)}
 								onDragEnd={(e) => D_End(e, index)}

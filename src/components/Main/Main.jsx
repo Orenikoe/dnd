@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import TasksDisplay from '../TasksDisplay/TasksDisplay';
 import History from '../History/History';
 import Login from '../Login/Login';
+import './Main.css'
 
 const Main = () => {
 	// eslint-disable-next-line
@@ -13,7 +14,7 @@ const Main = () => {
 
 
 	return (
-		<main>
+		<main className='page'>
 			<Routes>
 				<Route
 					path="/tasks"
