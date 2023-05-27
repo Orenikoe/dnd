@@ -1,7 +1,6 @@
 .input-field {
-    margin: 5px;
     display: block;
-    width: 100%;
+    width: 93%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -22,4 +21,19 @@
     position: absolute;
     margin: auto;
     color: red;
+  }
+
+  .signup-link {
+    cursor: pointer;
+    caret-color: transparent;
+  }
+
+  .input-wrapper {
+    padding: 5px;
+  }
+
+  @media screen and (max-width: 992px) {
+    .top-title {
+        max-width: 317px;
+    }
   }

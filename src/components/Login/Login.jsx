@@ -58,7 +58,10 @@ const Login = () => {
 
 	return (
 		<>
+		<div className='title-wrapper'>
 			<h2 className='top-title'>{signUpMode ? "Join Us Now!" : "Welcome Back!"}</h2>
+		</div>
+			<div className='input-wrapper'>
 			<input
       className='input-field'
 				placeholder="Telephone"
@@ -66,10 +69,11 @@ const Login = () => {
 					setPhone(e.target.value);
 					setError(() => false);
 				}}
-			></input>
-			{!approved && (
-				<button className='button' onClick={() => signUpMode ? handleSignUp(phone) : handleLogin(phone)}>{signUpMode ? "Next" : "Send Me Otp"}</button>
-			)}
+				></input>
+				{!approved && (
+					<button className='button' onClick={() => signUpMode ? handleSignUp(phone) : handleLogin(phone)}>{signUpMode ? "Next" : "Send Me Otp"}</button>
+				)}
+			</div>
 			{approved && (
 				<div>
 					<input
@@ -87,8 +91,8 @@ const Login = () => {
 			)}
 			{error && <h6 className='error-line'>Number is not registered with us</h6>}
 			{otpError && <h6 className='error-line'>OTP is incorrect</h6>}
-			<p onClick={() => setSignUpMode(true)}>
-				Doesn't have an acoount? Join Us!
+			<p className='signup-link' onClick={() => setSignUpMode((prevState) => !prevState)}>
+				{signUpMode ? "Back to Login" : "Doesn't have an acoount? Join Us!"}
 			</p>
 		</>
 	);

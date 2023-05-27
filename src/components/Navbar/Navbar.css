@@ -1,9 +1,5 @@
 nav {
-    /* display: flex;
-    height: 100px;
-    align-items: center;
-    position: absolute;
-    top: 20px; */
+ display: flex;
 }
 
 .button {
@@ -13,10 +9,20 @@ nav {
 .nav-wrapper {
     display: flex;
 }
-.nav-wrapper > img {
+ .company-logo {
     width: 150px;
     position: absolute;
     left: 0;
     top: 0;
     padding: 2.5rem;
 }
+
+.menu-item {
+    width: 33%;
+}
+
+@media screen and (max-width: 992px) {
+    .company-logo {
+        width: 70px;
+    }
+  }
