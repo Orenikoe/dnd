@@ -10,7 +10,7 @@ const [edited, setEdited] = useState(tasks)
 useEffect(() => {
 const filteredItems = tasks.filter((task) => task.isEdited)
 setEdited(filteredItems.length > 0 ? filteredItems : null)
-}, [])
+}, [tasks])
 
 
   return (<>

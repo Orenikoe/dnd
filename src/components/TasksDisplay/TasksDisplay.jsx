@@ -17,7 +17,7 @@ const TasksDisplay = (props) => {
 		if (userDetails.token === null) {
 			navigate('/login');
 		}
-	}, []);
+	});
 
 	function handleAddTodo() {
 		if (todoInputText.length > 0 && !editMode.state) {
