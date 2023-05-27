@@ -9,3 +9,14 @@ nav {
 .button {
     margin: 20px;
 }
+
+.nav-wrapper {
+    display: flex;
+}
+.nav-wrapper > img {
+    width: 150px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 2.5rem;
+}
