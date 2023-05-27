@@ -10,7 +10,7 @@ const Navbar = () => {
     
   return (
     <div className='nav-wrapper'>
-    <img className='company-logo' alt="logo" src="https://i.ibb.co/9TSSNQf/company-icon-2.png"/>
+   {!userDetails.token && <img className='company-logo' alt="logo" src="https://i.ibb.co/9TSSNQf/company-icon-2.png"/>}
  {   userDetails.token && <nav>
         {NavbarLinks.map((navElement) => {
           return <div className='menu-item'>
