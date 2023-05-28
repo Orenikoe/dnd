@@ -78,7 +78,7 @@ const Login = () => {
 				<div>
 					<input
           className='input-field'
-						placeholder="OTP"
+						placeholder="OTP waiting in your whatsApp"
 						onChange={(e) => {
 							setOtp(e.target.value);
               setOtpError(false)

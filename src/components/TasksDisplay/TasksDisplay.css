@@ -6,6 +6,7 @@
     padding: 20px 30px;
     border:2px solid greenyellow;
     font-size: 25px;
+    max-width: 100%;
   }
   .add-todo-button{
     font-family: 'Poppins', sans-serif;
