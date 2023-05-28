@@ -12,7 +12,6 @@ const TasksDisplay = (props) => {
 	const inputRef = useRef(null);
 	const navigate = useNavigate();
 
-
 	useEffect(() => {
 		if (userDetails.token === null) {
 			navigate('/login');
@@ -85,42 +84,33 @@ const TasksDisplay = (props) => {
 	}
 
 	function D_Enter(e, index) {
-		todoItemDragOver.current = index;
-
 		const cpArr = [...tasks];
-
 		let finalArr = [];
-
+		todoItemDragOver.current = index;
 		cpArr.forEach((item) => {
 			finalArr.push({
 				...item,
 				isDragging: true,
 			});
 		});
-
 		finalArr[index].isDragging = true;
-
 		setTasks(finalArr);
 	}
+
 	function D_End() {
 		const arr1 = [...tasks];
-
 		const todo_item_main = arr1[todoItemDrag.current];
 		arr1.splice(todoItemDrag.current, 1);
 		arr1.splice(todoItemDragOver.current, 0, todo_item_main);
-
 		todoItemDrag.current = null;
 		todoItemDragOver.current = null;
-
 		let f_arr = [];
-
 		arr1.forEach((item) => {
 			f_arr.push({
 				...item,
 				isDragging: false,
 			});
 		});
-
 		setTasks(f_arr);
 	}
 
@@ -144,9 +134,9 @@ const TasksDisplay = (props) => {
 							<h3
 								key={index}
 								draggable={true}
-								onDragStart={(e) => D_Start(e, index)}
+								onTouchStart={(e) => D_Start(e, index)}
 								onDragEnter={(e) => D_Enter(e, index)}
-								onDragEnd={(e) => D_End(e, index)}
+								onTouchEnd={(e) => D_End(e, index)}
 								style={{
 									textDecoration: todo.complete ? 'line-through' : 'none',
 									background: todo.complete ? 'red' : null,
@@ -154,15 +144,15 @@ const TasksDisplay = (props) => {
 								onClick={(e) => handleTodoClicks(e, index)}
 								className="todo-item-text"
 							>
-							{todo.todo}
+								{todo.todo}
 							</h3>
 							{todo.isDragging ? <div className="drag-indicator"></div> : null}
-								<img
-									className="edit-img"
-									onClick={() => editTask(todo, index)}
-									src="https://www.freeiconspng.com/thumbs/edit-icon-png/edit-icon-15.png"
-									alt="edit"
-								></img>
+							<img
+								className="edit-img"
+								onClick={() => editTask(todo, index)}
+								src="https://www.freeiconspng.com/thumbs/edit-icon-png/edit-icon-15.png"
+								alt="edit"
+							></img>
 						</div>
 					))}
 				</div>

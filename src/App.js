@@ -7,8 +7,8 @@ function App() {
 	return (
 		<UserContextProvider>
 		<div className="App">
-      <Navbar/>
-      <Main/>
+      		<Navbar/>
+      		<Main/>
 		</div>
 		</UserContextProvider>
 	);

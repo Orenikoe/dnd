@@ -10,16 +10,18 @@ const Navbar = () => {
     
   return (
     <div className='nav-wrapper'>
-    <img alt="logo" src="https://i.ibb.co/9TSSNQf/company-icon-2.png"/>
- {   userDetails.token && <nav>
-        {NavbarLinks.map((navElement) => {
-          return  <Link key={navElement.toLocation} onClick={navElement.functionality ? () => {
-            localStorage.removeItem('token')
-            setUserDetails({token: null})
-          } : null} to={navElement.toLocation}><button className='button'>{navElement.title}</button></Link>
-        })}
-    </nav>}
-        </div>
+      {!userDetails.token && <img className='company-logo' alt="logo" src="https://i.ibb.co/9TSSNQf/company-icon-2.png"/>}
+      {userDetails.token && 
+        <nav>
+            {NavbarLinks.map((navElement) => {
+            return <div className='menu-item'>
+              <Link key={navElement.toLocation} onClick={navElement.functionality ? () => {
+              localStorage.removeItem('token')
+              setUserDetails({token: null})
+              } : null} to={navElement.toLocation}><button className='button'>{navElement.title}</button></Link>
+              </div>})}
+        </nav>}
+      </div>
   )
 }
 
