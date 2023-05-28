@@ -60,20 +60,6 @@
   background-color: #e8294f;
 }
 
-/* Secondary Button */
-.button.secondary {
-  background-color: #f2f2f2;
-  color: #333333;
-}
-
-.button.secondary:hover {
-  background-color: #e0e0e0;
-}
-
-.button.secondary:active {
-  background-color: #c7c7c7;
-}
-
 .top-title {
   font-family: 'Arial', sans-serif;
   font-size: 48px;
